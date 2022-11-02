@@ -25,12 +25,30 @@ public class SearchController {
 
     }
 
+    @GetMapping(path="/getAllJavaTrainees1",produces = "application/json")
+    public ResponseEntity<Object> getSomeTrainees1(HttpServletRequest request) throws Exception {
+
+        LOGGER.info("came to getAllData");
+        List<String> listOfJavaTrainees = returnDummyList1();
+        return ResponseEntity.ok().body(listOfJavaTrainees);
+
+    }
+
     private List<String> returnDummyList() {
         List<String> list = new ArrayList<String>();
         list.add("Elvis");
         list.add("Ernest");
         list.add("Phase");
         list.add("Innocent");
+        return list;
+    }
+
+    private List<String> returnDummyList1() {
+        List<String> list = new ArrayList<String>();
+        list.add("Elvis1");
+        list.add("Ernest1");
+        list.add("Phase1");
+        list.add("Innocent1");
         return list;
     }
 }
