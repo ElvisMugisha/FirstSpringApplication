@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +16,11 @@ import java.util.List;
 @RequestMapping("/elvisSearch")
 @Component
 public class SearchController {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchController.class);
 
     @GetMapping(path="/getAllJavaTrainees",produces = "application/json")
-    public ResponseEntity<Object> getSomeTrainees(HttpServletRequest request) throws Exception {
+    public ResponseEntity<Object> getSomeTrainees(HttpServletRequest request) {
 
         LOGGER.info("came to getAllData");
         List<String> listOfJavaTrainees = returnDummyList();
@@ -26,12 +29,45 @@ public class SearchController {
     }
 
     @GetMapping(path="/getAllJavaTrainees1",produces = "application/json")
-    public ResponseEntity<Object> getSomeTrainees1(HttpServletRequest request) throws Exception {
+    public ResponseEntity<Object> getSomeTrainees1(HttpServletRequest request) {
 
-        LOGGER.info("came to getAllData");
-        List<String> listOfJavaTrainees = returnDummyList1();
-        return ResponseEntity.ok().body(listOfJavaTrainees);
+        LOGGER.info("came to getAllData1");
+        List<String> listOfJavaTrainees1 = returnDummyList1();
+        return ResponseEntity.ok().body(listOfJavaTrainees1);
 
+    }
+
+    @PostMapping(path="/postAllJavaTrainees", produces = "application/json")
+    public ResponseEntity<Object> postAllJavaTrainees(@RequestBody String inputString){
+
+        LOGGER.info("came to post data for string" + inputString);
+        List<String> randomStrings = returnPostDummyList(inputString);
+        return ResponseEntity.ok().body(randomStrings);
+    }
+
+    @PostMapping(path="/postAllJavaTrainees1", produces = "application/json")
+    public ResponseEntity<Object> postObject(@RequestBody Object inputString){
+
+        LOGGER.info("came to post data for string" + inputString);
+        List<String> randomStrings = returnDummyList1();
+        return ResponseEntity.ok().body(randomStrings);
+    }
+
+    @PostMapping(path="/postDog", produces = "application/json")
+    public ResponseEntity<Object> postObject(@RequestBody Dog dog){
+        LOGGER.info("came to post data for string" + dog);
+        if(dog.getColor().equals("red")){
+            return ResponseEntity.ok().body("Hi - " + dog.getName());
+        }
+        else{
+            return ResponseEntity.ok().body("No hi to you, not red dog - " + dog.getName() + " Dog of color : " + dog.getColor());
+        }
+    }
+
+    private List<String> returnPostDummyList(String inputString) {
+        List<String> list = new ArrayList<String>();
+        list.add(inputString);
+        return list;
     }
 
     private List<String> returnDummyList() {
