@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,9 @@ import java.util.List;
 @RequestMapping("/elvisSearch")
 @Component
 public class SearchController {
+
+    @Autowired
+    WordMeaningRepository wordMeaningRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchController.class);
 
@@ -62,6 +66,13 @@ public class SearchController {
         else{
             return ResponseEntity.ok().body("No hi to you, not red dog - " + dog.getName() + " Dog of color : " + dog.getColor());
         }
+    }
+
+    @PostMapping(path="/postWord", produces = "application/json")
+    public ResponseEntity<Object> postObject(@RequestBody WordMeaning wordMeaning){
+        LOGGER.info("Came to post data for string" + wordMeaning);
+        WordMeaning wordMeaning1= wordMeaningRepository.save(wordMeaning);
+        return ResponseEntity.ok().body("Hi - the generated id post saving object is " + wordMeaning.getId() + " With a word : " + wordMeaning.getWord());
     }
 
     private List<String> returnPostDummyList(String inputString) {
