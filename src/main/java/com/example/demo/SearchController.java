@@ -19,6 +19,9 @@ import java.util.List;
 public class SearchController {
 
     @Autowired
+    CarRepository carRepository;
+
+    @Autowired
     WordMeaningRepository wordMeaningRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchController.class);
@@ -72,7 +75,20 @@ public class SearchController {
     public ResponseEntity<Object> postObject(@RequestBody WordMeaning wordMeaning){
         LOGGER.info("Came to post data for string" + wordMeaning);
         WordMeaning wordMeaning1= wordMeaningRepository.save(wordMeaning);
-        return ResponseEntity.ok().body("Hi - the generated id post saving object is " + wordMeaning.getId() + " With a word : " + wordMeaning.getWord());
+        return ResponseEntity.ok().body(
+                "Hi - the generated id post saving object is "
+                + wordMeaning.getId() + " With a word : " + wordMeaning.getWord()
+        );
+    }
+
+    @PostMapping(path="/postCar", produces = "application/json")
+    public ResponseEntity<Object> postObject(@RequestBody Car car) {
+        LOGGER.info("Came to post Car info!" + car);
+        Car car1 = carRepository.save(car);
+        return ResponseEntity.ok().body(
+                "Hello, your car detailed info is: "
+                + car.getId() + " Car Name - " + car.getName()
+        );
     }
 
     private List<String> returnPostDummyList(String inputString) {
