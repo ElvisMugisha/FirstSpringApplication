@@ -4,15 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Car")
+@Table(name = "elvisCar")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
-    @JsonProperty("type")
-    private String type;
+//    @JsonProperty("type")
+//    private String type;
 
     @JsonProperty("name")
     private String name;
@@ -31,13 +31,13 @@ public class Car {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+//    public String getType() {
+//        return type;
+//    }
+//
+//    public void setType(String type) {
+//        this.type = type;
+//    }
 
     public String getName() {
         return name;
