@@ -1,14 +1,13 @@
-package com.example.demo;
+package com.example.demo.wordMeaning;
 
+import com.example.demo.car.Car;
+import com.example.demo.car.CarRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -86,8 +85,7 @@ public class SearchController {
         LOGGER.info("Came to post Car info!" + car);
         Car car1 = carRepository.save(car);
         return ResponseEntity.ok().body(
-                "Hello, your car detailed info is: "
-                + car.getId() + " Car Name - " + car.getName()
+                "Hello, your car detailed info was created successful!:  CarName " + car.getName()
         );
     }
 

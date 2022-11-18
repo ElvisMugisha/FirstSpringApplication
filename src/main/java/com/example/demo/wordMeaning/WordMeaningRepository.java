@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.wordMeaning;
 
+import com.example.demo.wordMeaning.WordMeaning;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
