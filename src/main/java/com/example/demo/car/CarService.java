@@ -1,7 +1,5 @@
 package com.example.demo.car;
 
-import com.example.demo.car.Car;
-import com.example.demo.car.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
